@@ -9,6 +9,33 @@
 	
 		<h1> Learn Technical Analysis & Fibonacci Analysis </h1>
 		
+<div class="container">
+  <?php 
+  $user = new User();
+  $db = new Database();
+
+  $db->connectMySQL();
+
+
+  if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $login = $user->cek_login(mysql_real_escape_string($_POST['username']), mysql_real_escape_string($_POST['password']));
+    if($login){
+      if($user->sesi()==1){
+        header("location:home.php");
+      }elseif($user->sesi()==2){
+        header("location:home.php");
+      }
+    }else{
+      echo "
+      <div class=\"alert alert-block\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+        <h4>Login Failed!</h4>
+        ID or Password Wrong!
+      </div>
+      ";
+    }
+  }
+  ?>
 		<button type="button"> Test! </button>
 		
 	<!--	img src="ProfilePictures\Photo1.jpg" alt="Profile Pictures" width="200"/> 
